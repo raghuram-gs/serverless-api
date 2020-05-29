@@ -20,7 +20,7 @@ provider:
   # under process.env.
   environment:
     tableName: designs
-
+    stripeSecretKey: ${env:STRIPE_SECRET_KEY}
   # 'iamRoleStatements' defines the permission policy for the Lambda function.
   # In this case Lambda functions are granted with permissions to access DynamoDB.
   iamRoleStatements:
@@ -43,19 +43,56 @@ functions:
   #     domain api call
   # - authorizer: authenticate using the AWS IAM role
   create:
-    handler: create.main
+    handler: functions/create.main
     events:
       - http:
           path: designs
           method: post
           cors: true
           authorizer: aws_iam
-
+  # gets
   get:
-    handler: get.main
+    handler: functions/get.main
     events:
       - http:
           path: designs/{id}
           method: get
           cors: true
           authorizer: aws_iam
+  # lists
+  list:
+    handler: functions/list.main
+    events:
+      - http:
+          path: designs
+          method: get
+          cors: true
+          authoriser: aws_iam
+  # update
+  update:
+    handler: functions/update.main
+    events:
+      - http:
+          path: designs/{id}
+          method: put
+          cors: true
+          authoriser: aws_iam
+  # delete
+  delete:
+    handler: functions/delete.main
+    events:
+      - http:
+          path: designs/{id}
+          method: delete
+          cors: true
+          authorizer: aws_iam
+  # billing
+  billing:
+    handler: functions/billing.main
+    events:
+      - http:
+          path: billing
+          method: post
+          cors: true
+          authorizer: aws_iam
+
