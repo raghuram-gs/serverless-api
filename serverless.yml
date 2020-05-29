@@ -1,6 +1,10 @@
 # NOTE: update this with your service name
 service: react-design-app-api
 
+resources:
+  # API Gateway Errors
+  - ${file(resources/api-gateway-errors.yml)}
+
 # Create an optimized package for our functions
 package:
   individually: true

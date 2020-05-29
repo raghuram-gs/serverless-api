@@ -1,3 +1,3 @@
 export function evaluateDesignStoreCost(storage) {
-    return 1 * storage;
+    return 10 * storage;
   }
