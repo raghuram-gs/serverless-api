@@ -1,6 +1,6 @@
 import * as uuid from "uuid";
 import handler from "../libs/handler-lib";
-import dynamoDb from "./libs/dynamodb-lib";
+import dynamoDb from "../libs/dynamo-lib";
 
 export const main = handler(async (event, context) => {
   const data = JSON.parse(event.body);
